@@ -25,10 +25,10 @@ import { browseCategories, categoryBanners } from "@/data/categories";
 
 const CDN = "https://cdn.manfarebd.com/glamtouch/media";
 
-const hijarNiqabCat = browseCategories.find((c) => c.slug === "hijab-niqab")!;
-const abayaGownCat = browseCategories.find((c) => c.slug === "abaya-gown")!;
-const khimarJilbabCat = browseCategories.find((c) => c.slug === "khimar-jilbab")!;
-const designerKarchupiCat = browseCategories.find((c) => c.slug === "designer-karchupi-abayas")!;
+const hijarNiqabCat = browseCategories.find((c) => c.slug === "panjabi")!;
+const abayaGownCat = browseCategories.find((c) => c.slug === "polo-shirt")!;
+const khimarJilbabCat = browseCategories.find((c) => c.slug === "drop-shoulder-tshirt")!;
+const designerKarchupiCat = browseCategories.find((c) => c.slug === "bootcut-gurkha-pant")!;
 
 export default function HomePage() {
   return (
@@ -68,19 +68,19 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-4">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <PromoBanner
-                image={`${CDN}/md/175490745481841481619_banner_1_cape_and_cover_up.webp`}
-                alt="Luxury Products — Glam Touch"
-                href="/category/cape-cover-up"
-                overlayText="Luxury Products"
+                image="https://cdn.manfarebd.com/manfarebd/media/md/177799054199940989123_product_caruosel_banner_premium_tshirt.webp"
+                alt="Premium Pants Collection — Manfare"
+                href="/category/bootcut-gurkha-pant"
+                overlayText="Formal Gurkha Pants"
                 overlaySubtext="Discover our premium collection"
                 aspectClass="aspect-[4/3]"
               />
               <PromoBanner
-                image={`${CDN}/177114819266541485860_glmatouch_eid_collection_web_banner.webp`}
-                alt="Designer Premium Abaya — Glam Touch"
-                href="/category/designer-premium-abayas"
-                overlayText="Designer Premium Abaya"
-                overlaySubtext="Elegance meets modesty"
+                image="https://cdn.manfarebd.com/manfarebd/media/md/177159452640628470149_product_caruosel_banner_panjabi.webp"
+                alt="Designer Panjabi — Manfare"
+                href="/category/panjabi"
+                overlayText="Designer Eid Panjabi"
+                overlaySubtext="Tradition meets comfort"
                 aspectClass="aspect-[4/3]"
               />
             </div>
@@ -98,7 +98,7 @@ export default function HomePage() {
           category={hijarNiqabCat}
           products={hijarNiqab}
           imagePosition="left"
-          bannerImage={categoryBanners["hijab-niqab"]}
+          bannerImage={categoryBanners["panjabi"]}
         />
 
         {/* 12. Abaya & Gown category section */}
@@ -106,7 +106,7 @@ export default function HomePage() {
           category={abayaGownCat}
           products={abayaGown}
           imagePosition="right"
-          bannerImage={categoryBanners["abaya-gown"]}
+          bannerImage={categoryBanners["polo-shirt"]}
         />
 
         {/* 13. Three-column promo row */}
@@ -115,19 +115,19 @@ export default function HomePage() {
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[
                 {
-                  image: `${CDN}/sm/175337414065373076723_1_designer_premium_abayas.webp`,
-                  alt: "Designer Premium Abayas",
-                  href: "/category/designer-premium-abayas",
+                  image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799448192420972676_category_cards_panjabi.webp",
+                  alt: "Panjabi Collection",
+                  href: "/category/panjabi",
                 },
                 {
-                  image: `${CDN}/sm/175337417429422013213_4_designer_karchupi_abayas_cart.webp`,
-                  alt: "Designer Karchupi Abayas",
-                  href: "/category/designer-karchupi-abayas",
+                  image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799451597618912378_category_cards_knitted_polo.webp",
+                  alt: "Polo Shirt Collection",
+                  href: "/category/polo-shirt",
                 },
                 {
-                  image: `${CDN}/sm/175337418506020103852_6_cape_cover_up_category_cart.webp`,
-                  alt: "Cape & Cover Up",
-                  href: "/category/cape-cover-up",
+                  image: "https://cdn.manfarebd.com/manfarebd/media/sm/176581748811188152344_5_web_card_drop.webp",
+                  alt: "Drop Shoulder T-Shirt Collection",
+                  href: "/category/drop-shoulder-tshirt",
                 },
               ].map((banner) => (
                 <PromoBanner
@@ -147,7 +147,7 @@ export default function HomePage() {
           category={khimarJilbabCat}
           products={khimarJilbab}
           imagePosition="left"
-          bannerImage={categoryBanners["khimar-jilbab"]}
+          bannerImage={categoryBanners["drop-shoulder-tshirt"]}
         />
 
         {/* 15. Designer Karchupi Abayas category section */}
@@ -155,7 +155,7 @@ export default function HomePage() {
           category={designerKarchupiCat}
           products={designerKarchupi}
           imagePosition="right"
-          bannerImage={categoryBanners["designer-karchupi-abayas"]}
+          bannerImage={categoryBanners["bootcut-gurkha-pant"]}
         />
 
         {/* 16. Customer reviews */}

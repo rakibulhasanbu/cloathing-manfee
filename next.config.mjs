@@ -5,7 +5,7 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.manfarebd.com",
-        pathname: "/glamtouch/media/**",
+        pathname: "/**",
       },
     ],
   },

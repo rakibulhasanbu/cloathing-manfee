@@ -23,10 +23,10 @@ export function Header() {
         <div className="flex flex-1 flex-col items-center">
           <Link href="/" className="flex flex-col items-center">
             <span className="font-serif text-2xl font-bold tracking-[0.25em] text-gray-900 uppercase">
-              GLAM TOUCH
+              ALPHA MAN
             </span>
             <span className="text-[9px] tracking-[0.4em] text-gray-400 uppercase">
-              Glamour of Modesty
+              Alpha Man
             </span>
           </Link>
         </div>
@@ -80,45 +80,84 @@ export function Header() {
       </nav>
 
       {/* ── Mobile top bar ── */}
-      <div className="flex items-center justify-between px-4 py-3 md:hidden">
+      <div className="flex items-center justify-between px-4 py-3 md:hidden bg-black border-b border-yellow-500/30">
         <Sheet>
           <SheetTrigger asChild>
-            <button aria-label="Open menu" className="p-1">
-              <Menu className="h-6 w-6 text-gray-800" />
+            <button aria-label="Open menu" className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-300">
+              <Menu className="h-6 w-6 text-yellow-400" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-72 p-0">
+          <SheetContent side="left" className="w-80 p-0 shadow-2xl bg-gradient-to-b from-black to-gray-900">
             <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-            <div className="border-b px-5 py-4">
-              <span className="font-serif text-lg font-bold tracking-[0.2em] text-gray-900 uppercase">
-                GLAM TOUCH
+            
+            {/* Header section with gold accent */}
+            <div className="bg-gradient-to-b from-black to-gray-900 px-6 py-8 border-b border-yellow-500/30">
+              <span className="font-serif text-xl font-bold tracking-[0.25em] text-yellow-400 uppercase block drop-shadow-lg">
+                ALPHA MAN
               </span>
-              <p className="text-[9px] tracking-widest text-gray-400 uppercase">
-                Glamour of Modesty
+              <div className="h-0.5 w-16 bg-gradient-to-r from-yellow-400 to-transparent mt-3"></div>
+              <p className="text-[10px] tracking-[0.15em] text-yellow-600/70 uppercase mt-3">
+                Premium Collection
               </p>
             </div>
+
+            {/* Search section */}
+            <div className="px-6 py-4 border-b border-yellow-500/20">
+              <div className="relative">
+                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-yellow-500/50" />
+                <Input 
+                  className="h-10 pl-10 text-sm rounded-lg bg-gray-800 border border-yellow-500/30 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:ring-yellow-400/20 transition-all duration-300" 
+                  placeholder="Search products..." 
+                />
+              </div>
+            </div>
+
+            {/* Navigation items */}
             <nav className="flex flex-col overflow-y-auto">
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="border-b border-gray-100 px-5 py-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                  className="px-6 py-4 text-sm font-semibold text-gray-300 hover:text-yellow-400 border-b border-gray-800/50 hover:bg-gradient-to-r hover:from-yellow-500/10 hover:to-transparent transition-all duration-300 flex items-center justify-between group"
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  <span className="text-gray-600 group-hover:text-yellow-400 transition-colors duration-300 group-hover:translate-x-1 transform">
+                    →
+                  </span>
                 </Link>
               ))}
             </nav>
+
+            {/* Footer section */}
+            <div className="border-t border-yellow-500/20 bg-black/50 px-6 py-5">
+              <div className="flex flex-col gap-4">
+                <a
+                  href="tel:+8809606999695"
+                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors duration-300"
+                >
+                  <Phone className="h-5 w-5 text-yellow-500/70 group-hover:text-yellow-400" />
+                  Call Us: +880 9606 999695
+                </a>
+                <Link
+                  href="/account"
+                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors duration-300"
+                >
+                  <User className="h-5 w-5 text-yellow-500/70" />
+                  My Account
+                </Link>
+              </div>
+            </div>
           </SheetContent>
         </Sheet>
 
         <Link href="/" className="flex flex-col items-center">
-          <span className="font-serif text-lg font-bold tracking-[0.2em] text-gray-900 uppercase">
-            GLAM TOUCH
+          <span className="font-serif text-lg font-bold tracking-[0.2em] text-yellow-400 uppercase drop-shadow-md">
+            ALPHA MAN
           </span>
         </Link>
 
-        <Link href="/account" aria-label="Account" className="p-1">
-          <User className="h-6 w-6 text-gray-800" />
+        <Link href="/account" aria-label="Account" className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-300">
+          <User className="h-6 w-6 text-yellow-400" />
         </Link>
       </div>
     </header>

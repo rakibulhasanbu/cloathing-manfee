@@ -28,10 +28,10 @@ export function Footer() {
           <div className="col-span-1">
             <div className="mb-3">
               <span className="font-serif text-lg font-bold tracking-[0.2em] text-white uppercase">
-                GLAM TOUCH
+                ALPHA MAN
               </span>
               <p className="text-[9px] tracking-[0.3em] text-gray-500 uppercase">
-                Glamour of Modesty
+                Alpha Man
               </p>
             </div>
             <div className="space-y-2 text-sm">
@@ -50,16 +50,16 @@ export function Footer() {
                 +880 9639-148048
               </a>
               <a
-                href="mailto:info@glamtouch.com.bd"
+                href="mailto:info@alphaman.com.bd"
                 className="flex items-center gap-2 hover:text-white"
               >
                 <Mail className="h-4 w-4 shrink-0 text-gray-400" />
-                info@glamtouch.com.bd
+                info@alphaman.com.bd
               </a>
             </div>
             <div className="mt-4 flex gap-3">
               <a
-                href="https://www.facebook.com/glamtouchbd"
+                href="https://www.facebook.com/alphamanbd"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white"
@@ -68,7 +68,7 @@ export function Footer() {
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="https://www.instagram.com/glamtouchbd"
+                href="https://www.instagram.com/alphamanbd"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white"
@@ -77,7 +77,7 @@ export function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="https://www.youtube.com/@glamtouchbd"
+                href="https://www.youtube.com/@alphamanbd"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white"
@@ -163,7 +163,7 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10 py-4">
         <p className="text-center text-[11px] text-gray-500">
-          © {new Date().getFullYear()} Glam Touch. All rights reserved.
+          © {new Date().getFullYear()} Alpha Man. All rights reserved.
         </p>
       </div>
     </footer>

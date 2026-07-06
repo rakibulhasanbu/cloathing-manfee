@@ -9,7 +9,7 @@ export function AboutSection() {
       <div className="absolute inset-0">
         <Image
           src={`${CDN}/175412582929266302186_gt_web_banner_2.webp`}
-          alt="Glam Touch collection"
+          alt="Alpha Man collection"
           fill
           className="object-cover object-center"
           sizes="100vw"
@@ -23,19 +23,19 @@ export function AboutSection() {
           {/* Logo text */}
           <div className="mb-4">
             <span className="font-serif text-2xl font-bold tracking-[0.25em] text-gray-900 uppercase md:text-3xl">
-              GLAM TOUCH
+              ALPHA MAN
             </span>
             <p className="mt-0.5 text-[10px] tracking-[0.35em] text-gray-400 uppercase">
-              Glamour of Modesty
+              Alpha Man
             </p>
           </div>
 
           <div className="mx-auto mb-4 h-px w-16 bg-gray-300" />
 
           <p className="text-sm leading-relaxed text-gray-700 md:text-base">
-            Glam Touch is a renowned Islamic dressing brand dedicated to providing premium quality
-            Islamic fashion for Muslim women. Our collection of abayas, hijabs, khimars, and
-            accessories combines elegance with modesty, reflecting the beauty of Islamic values.
+            Alpha Man is a renowned fashion brand dedicated to providing premium quality
+            clothing and accessories for men. Our collection combines style with confidence,
+            reflecting the strength and sophistication of the modern man.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-gray-600">
             We are committed to the{" "}

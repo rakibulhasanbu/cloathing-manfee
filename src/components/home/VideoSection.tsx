@@ -24,7 +24,7 @@ const videos = [
 export function VideoSection() {
   return (
     <section className="bg-[#f8f4f0] py-8">
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
         <div className="mb-5">
           <h2 className="text-base font-bold tracking-widest text-gray-900 uppercase md:text-lg">
             Designer Karchupi Abaya

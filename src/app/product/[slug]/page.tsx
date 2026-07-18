@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: Props) {
       <main className="pb-20 md:pb-0">
         {/* ── Breadcrumb ─────────────────────────────────────────────── */}
         <div className="border-b border-gray-100 bg-gray-50">
-          <div className="mx-auto max-w-7xl px-4 py-3">
+          <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16 py-3">
             <nav
               aria-label="Breadcrumb"
               className="flex items-center gap-1 overflow-x-auto whitespace-nowrap text-[11px] text-gray-400"
@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: Props) {
         </div>
 
         {/* ── Content ────────────────────────────────────────────────── */}
-        <div className="mx-auto max-w-7xl px-4 py-6 md:py-10">
+        <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16 py-6 md:py-10">
           {/* 1. Gallery + Info */}
           <ProductDetailMain product={product} />
 

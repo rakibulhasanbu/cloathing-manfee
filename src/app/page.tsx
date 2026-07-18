@@ -4,7 +4,6 @@ import { HeroBanner } from "@/components/home/HeroBanner";
 import { FeatureBar } from "@/components/home/FeatureBar";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
 import { ProductSection } from "@/components/home/ProductSection";
-import { VideoSection } from "@/components/home/VideoSection";
 import { PromoBanner } from "@/components/home/PromoBanner";
 import { AboutSection } from "@/components/home/AboutSection";
 import { CategoryProductSection } from "@/components/home/CategoryProductSection";
@@ -15,15 +14,12 @@ import { Footer } from "@/components/home/Footer";
 import {
   bestSelling,
   newArrivals,
-  featuredProducts,
   hijarNiqab,
   abayaGown,
   khimarJilbab,
   designerKarchupi,
 } from "@/data/products";
 import { browseCategories, categoryBanners } from "@/data/categories";
-
-const CDN = "https://cdn.manfarebd.com/glamtouch/media";
 
 const hijarNiqabCat = browseCategories.find((c) => c.slug === "panjabi")!;
 const abayaGownCat = browseCategories.find((c) => c.slug === "polo-shirt")!;
@@ -33,67 +29,60 @@ const designerKarchupiCat = browseCategories.find((c) => c.slug === "bootcut-gur
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
+      {/* ── Header ── */}
       <Header />
+
+      {/* ── Mobile bottom navigation ── */}
       <BottomNav />
 
       <main className="pb-16 md:pb-0">
         {/* 1. Hero carousel */}
         <HeroBanner />
 
-        {/* 2. Feature icons */}
+        {/* 2. Feature icons bar */}
         <FeatureBar />
 
         {/* 3. Browse categories */}
         <CategoryGrid />
 
-        {/* 4. Best selling products */}
+        {/* 4. Best Selling Products */}
         <ProductSection
           title="Best Selling Products"
           products={bestSelling}
           viewAllHref="/category/best-selling"
         />
 
-        {/* 5. New arrival products */}
+        {/* 5. New Arrival Products */}
         <ProductSection
           title="New Arrival Products"
           products={newArrivals}
           viewAllHref="/category/new-arrivals"
         />
 
-        {/* 6. YouTube video section */}
-        <VideoSection />
-
-        {/* 7 + 8. Luxury + Designer Premium — side by side */}
+        {/* 6. Dual promo banners — Boxer / Designer Edition */}
         <section className="bg-white py-4">
-          <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <PromoBanner
                 image="https://cdn.manfarebd.com/manfarebd/media/md/177799054199940989123_product_caruosel_banner_premium_tshirt.webp"
-                alt="Premium Pants Collection — Manfare"
+                alt="Formal Gurkha Pants — Manfare"
                 href="/category/bootcut-gurkha-pant"
-                overlayText="Formal Gurkha Pants"
-                overlaySubtext="Discover our premium collection"
                 aspectClass="aspect-[4/3]"
               />
               <PromoBanner
                 image="https://cdn.manfarebd.com/manfarebd/media/md/177159452640628470149_product_caruosel_banner_panjabi.webp"
-                alt="Designer Panjabi — Manfare"
+                alt="Designer Eid Panjabi — Manfare"
                 href="/category/panjabi"
-                overlayText="Designer Eid Panjabi"
-                overlaySubtext="Tradition meets comfort"
                 aspectClass="aspect-[4/3]"
               />
             </div>
           </div>
         </section>
 
-        {/* 9. Featured products */}
-        <ProductSection title="" products={featuredProducts} />
-
-        {/* 10. About / brand section */}
+        {/* 7. About / brand section */}
         <AboutSection />
 
-        {/* 11. Hijar & Niqab category section */}
+        {/* 8. Panjabi category section */}
         <CategoryProductSection
           category={hijarNiqabCat}
           products={hijarNiqab}
@@ -101,7 +90,7 @@ export default function HomePage() {
           bannerImage={categoryBanners["panjabi"]}
         />
 
-        {/* 12. Abaya & Gown category section */}
+        {/* 9. Polo Shirt category section */}
         <CategoryProductSection
           category={abayaGownCat}
           products={abayaGown}
@@ -109,24 +98,24 @@ export default function HomePage() {
           bannerImage={categoryBanners["polo-shirt"]}
         />
 
-        {/* 13. Three-column promo row */}
+        {/* 10. Three-column promo row */}
         <section className="bg-white py-4">
-          <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[
                 {
                   image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799448192420972676_category_cards_panjabi.webp",
-                  alt: "Panjabi Collection",
+                  alt: "Panjabi Collection — Manfare",
                   href: "/category/panjabi",
                 },
                 {
                   image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799451597618912378_category_cards_knitted_polo.webp",
-                  alt: "Polo Shirt Collection",
+                  alt: "Polo Shirt Collection — Manfare",
                   href: "/category/polo-shirt",
                 },
                 {
                   image: "https://cdn.manfarebd.com/manfarebd/media/sm/176581748811188152344_5_web_card_drop.webp",
-                  alt: "Drop Shoulder T-Shirt Collection",
+                  alt: "Drop Shoulder T-Shirt — Manfare",
                   href: "/category/drop-shoulder-tshirt",
                 },
               ].map((banner) => (
@@ -142,7 +131,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 14. Khimar & Jilbab category section */}
+        {/* 11. Drop Shoulder T-Shirt category section */}
         <CategoryProductSection
           category={khimarJilbabCat}
           products={khimarJilbab}
@@ -150,7 +139,7 @@ export default function HomePage() {
           bannerImage={categoryBanners["drop-shoulder-tshirt"]}
         />
 
-        {/* 15. Designer Karchupi Abayas category section */}
+        {/* 12. Bootcut Gurkha Pant category section */}
         <CategoryProductSection
           category={designerKarchupiCat}
           products={designerKarchupi}
@@ -158,13 +147,14 @@ export default function HomePage() {
           bannerImage={categoryBanners["bootcut-gurkha-pant"]}
         />
 
-        {/* 16. Customer reviews */}
+        {/* 13. Customer Reviews */}
         <CustomerReviews />
 
-        {/* 17. Newsletter */}
+        {/* 14. Newsletter */}
         <Newsletter />
       </main>
 
+      {/* ── Footer ── */}
       <Footer />
     </div>
   );

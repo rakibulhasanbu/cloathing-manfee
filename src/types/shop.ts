@@ -6,6 +6,8 @@ export interface Product {
   originalPrice?: number;
   image: string;
   badge?: "NEW" | "SALE" | "HOT";
+  rating?: number;
+  reviewCount?: number;
 }
 
 export interface Category {

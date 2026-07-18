@@ -1,26 +1,48 @@
-import { Truck, RefreshCw, Banknote, MapPin } from "lucide-react";
+import Image from "next/image";
 
 const features = [
-  { Icon: Truck, title: "Free Delivery", desc: "On orders over ৳2000" },
-  { Icon: RefreshCw, title: "Easy Return", desc: "7-day return policy" },
-  { Icon: Banknote, title: "Cash on Delivery", desc: "Available nationwide" },
-  { Icon: MapPin, title: "Order Tracking", desc: "Track your order live" },
+  {
+    icon: "https://manfarebd.com/_next/static/media/feature_delivery.3e4f1dad.svg",
+    title: "FASTEST SHIPPING COUNTRYWIDE",
+  },
+  {
+    icon: "https://manfarebd.com/_next/static/media/feature_return.9a0b1a12.svg",
+    title: "EASY RETURN POLICY",
+  },
+  {
+    icon: "https://manfarebd.com/_next/static/media/feature_quality.7f8c9e23.svg",
+    title: "PREMIUM QUALITY PRODUCT",
+  },
+  {
+    icon: "https://manfarebd.com/_next/static/media/feature_support.1b2c3d4e.svg",
+    title: "ONLINE SUPPORT 24/7",
+  },
 ];
 
 export function FeatureBar() {
   return (
-    <div className="border-y border-gray-100 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-3">
-        <div className="grid grid-cols-2 divide-x divide-y divide-gray-100 md:grid-cols-4 md:divide-y-0">
-          {features.map(({ Icon, title, desc }) => (
-            <div key={title} className="flex items-center gap-3 px-4 py-3">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gray-100">
-                <Icon className="h-4 w-4 text-gray-700" />
+    <div className="bg-white border-y border-gray-100 py-5">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
+        <div className="grid grid-cols-2 md:grid-cols-4">
+          {features.map(({ icon, title }, index) => (
+            <div
+              key={title}
+              className={`flex flex-col items-center justify-center gap-2 px-4 py-4 text-center ${
+                index < 3 ? "border-b border-gray-100 md:border-b-0 md:border-r" : ""
+              }`}
+            >
+              <div className="h-10 w-10">
+                <Image
+                  src={icon}
+                  alt={title}
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
-              <div>
-                <p className="text-xs font-semibold text-gray-900">{title}</p>
-                <p className="text-[10px] text-gray-500">{desc}</p>
-              </div>
+              <p className="text-[11px] font-bold tracking-[0.25em] text-[#333] uppercase font-bahnschrift">
+                {title}
+              </p>
             </div>
           ))}
         </div>

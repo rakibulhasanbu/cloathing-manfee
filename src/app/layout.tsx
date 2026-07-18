@@ -1,4 +1,4 @@
-import { Geist_Mono, Inter } from "next/font/google"
+import { Geist_Mono, Inter, Montserrat, Bebas_Neue } from "next/font/google"
 
 import "./globals.css"
 
@@ -12,6 +12,17 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+const montserrat = Montserrat({
+  subsets: [ "latin" ],
+  variable: "--font-montserrat",
+})
+
+const bebasNeue = Bebas_Neue({
+  weight: "400",
+  subsets: [ "latin" ],
+  variable: "--font-bebas",
+})
+
 export default function RootLayout ({
   children,
 }: Readonly<{
@@ -21,7 +32,7 @@ export default function RootLayout ({
     <html
       lang="en"
       suppressHydrationWarning
-      className={ cn("antialiased", fontMono.variable, "font-sans", inter.variable) }
+      className={ cn("antialiased", fontMono.variable, "font-sans", inter.variable, montserrat.variable, bebasNeue.variable) }
     >
       <body>
         <Providers>{ children }</Providers>
@@ -29,3 +40,4 @@ export default function RootLayout ({
     </html>
   )
 }
+

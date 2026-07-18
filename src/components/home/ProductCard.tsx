@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Star } from "lucide-react";
 import type { Product } from "@/types/shop";
-
-const badgeStyles: Record<string, string> = {
-  NEW: "bg-emerald-500 text-white",
-  SALE: "bg-red-500 text-white",
-  HOT: "bg-orange-500 text-white",
-};
 
 interface Props {
   product: Product;
@@ -16,51 +9,48 @@ interface Props {
 
 export function ProductCard({ product }: Props) {
   return (
-    <div className="group flex flex-col overflow-hidden rounded-lg border border-gray-100 bg-white transition-shadow hover:shadow-md">
+    <div className="group flex flex-col overflow-hidden rounded-xl bg-white border border-gray-100 shadow-sm transition-all hover:shadow-md">
       <Link href={`/product/${product.slug}`} className="relative block overflow-hidden">
-        <div className="relative aspect-[3/4] w-full bg-gray-50">
+        <div className="relative aspect-[3/4] w-full bg-gray-100 overflow-hidden">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           />
-          {product.badge && (
-            <span
-              className={cn(
-                "absolute top-2 left-2 rounded px-1.5 py-0.5 text-[9px] font-bold tracking-wider uppercase",
-                badgeStyles[product.badge]
-              )}
-            >
-              {product.badge}
-            </span>
-          )}
+          <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1 rounded bg-white/90 border border-gray-200/60 px-2 py-0.5 text-[10px] font-bold text-gray-800 shadow-sm">
+            <span>{product.rating?.toFixed(1) ?? "0.0"}</span>
+            <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+            <span className="text-gray-300">|</span>
+            <span className="text-gray-500">{product.reviewCount ?? "0"}</span>
+          </div>
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col gap-2 p-2.5">
+      <div className="flex flex-1 flex-col gap-2 p-3.5">
         <Link href={`/product/${product.slug}`}>
-          <p className="line-clamp-2 text-xs font-medium text-gray-800 hover:text-black">
+          <p className="block truncate text-[13px] font-medium text-gray-600 hover:text-black transition-colors font-bahnschrift">
             {product.name}
           </p>
         </Link>
 
-        <div className="flex items-center gap-1.5">
-          <span className="text-sm font-bold text-gray-900">
-            ৳{product.price.toLocaleString()}
+        <div className="flex items-center gap-2">
+          <span className="text-[13px] font-bold text-gray-900 font-bahnschrift">
+            TK. {product.price.toLocaleString()}
           </span>
           {product.originalPrice && (
-            <span className="text-xs text-gray-400 line-through">
-              ৳{product.originalPrice.toLocaleString()}
+            <span className="text-[11px] text-gray-400 line-through font-bahnschrift">
+              TK. {product.originalPrice.toLocaleString()}
             </span>
           )}
         </div>
 
-        <button className="mt-auto flex w-full items-center justify-center gap-1.5 rounded bg-gray-900 py-1.5 text-[11px] font-medium text-white transition-colors hover:bg-black">
-          <ShoppingCart className="h-3 w-3" />
-          Add to Cart
-        </button>
+        <div className="mt-auto flex justify-center pt-1.5">
+          <button className="rounded-full border border-gray-200 bg-white px-5 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-300 hover:text-black transition-all font-bahnschrift">
+            Add To Cart
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -2,13 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductCard } from "@/components/home/ProductCard";
 import type { Product, Category } from "@/types/shop";
 
@@ -25,71 +20,89 @@ export function CategoryProductSection({
   imagePosition,
   bannerImage,
 }: Props) {
+  const scrollRef = useRef<HTMLDivElement>(null);
   const banner = bannerImage ?? category.image;
 
-  const gridClass =
-    imagePosition === "left"
-      ? "grid grid-cols-1 items-start gap-4 md:grid-cols-[1.2fr_3fr]"
-      : "grid grid-cols-1 items-start gap-4 md:grid-cols-[3fr_1.2fr]";
+  const scroll = (dir: "left" | "right") => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({
+      left: dir === "left" ? -280 : 280,
+      behavior: "smooth",
+    });
+  };
 
   const categoryPanel = (
-    <Link
-      href={`/category/${category.slug}`}
-      className="group relative block h-full overflow-hidden rounded-xl"
-    >
-      <div className="relative h-full min-h-[300px] overflow-hidden bg-gray-100 md:min-h-[420px]">
+    <div className="flex-1">
+      {/* Desktop tall banner image */}
+      <Link href={`/category/${category.slug}`}>
         <Image
           src={banner}
           alt={category.name}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 25vw"
+          width={370}
+          height={470}
+          className="hidden md:block h-full w-full object-cover max-w-[900px]"
+          style={{ aspectRatio: "0.787" }}
+          sizes="(max-width: 768px) 100vw, 40vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-5">
-          <h3 className="mb-2 font-serif text-xl font-bold text-white uppercase">
-            {category.name}
-          </h3>
-          <span className="inline-block rounded border border-white px-4 py-1.5 text-xs font-semibold tracking-widest text-white uppercase transition-all hover:bg-white hover:text-black">
-            Shop Now
-          </span>
-        </div>
-      </div>
-    </Link>
+      </Link>
+      {/* Mobile wide banner image */}
+      <Link href={`/category/${category.slug}`}>
+        <Image
+          src={banner}
+          alt={category.name}
+          width={1950}
+          height={840}
+          className="md:hidden w-full h-full object-cover rounded-t-lg"
+          style={{ aspectRatio: "2.32" }}
+          sizes="100vw"
+        />
+      </Link>
+    </div>
   );
 
   const productSlider = (
-    <Carousel opts={{ align: "start" }} className="px-8">
-      <CarouselContent className="-ml-3">
-        {products.map((product) => (
-          <CarouselItem key={product.id} className="pl-3 basis-1/2 md:basis-1/3">
-            <ProductCard product={product} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="left-0 border-gray-200 bg-white shadow-md hover:bg-gray-50" />
-      <CarouselNext className="right-0 border-gray-200 bg-white shadow-md hover:bg-gray-50" />
-    </Carousel>
+    <div className="flex-1 w-[88%] md:w-[75%] md:px-10 mx-auto">
+      <div className="my-6 relative">
+        <button
+          aria-label="Scroll left"
+          onClick={() => scroll("left")}
+          className="preBtn absolute top-1/2 -left-4 sm:-left-5 md:-left-8 z-10 -translate-y-1/2"
+        >
+          <ChevronLeft className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6 text-gray-700" />
+        </button>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-3 overflow-x-auto pb-4 scroll-smooth"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {products.map((product) => (
+            <div key={product.id} className="shrink-0 w-[44vw] sm:w-[30vw] md:w-[22vw] lg:w-[18vw]">
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+
+        <button
+          aria-label="Scroll right"
+          onClick={() => scroll("right")}
+          className="nextBtn absolute top-1/2 -right-4 sm:-right-5 md:-right-8 z-10 -translate-y-1/2"
+        >
+          <ChevronRight className="w-4 md:w-5 lg:w-6 h-4 md:h-5 lg:h-6 text-gray-700" />
+        </button>
+      </div>
+    </div>
   );
 
   return (
-    <section className="bg-white py-8">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className={gridClass}>
-          {imagePosition === "left" ? (
-            // Products DOM-first so they appear first on mobile stack.
-            // Explicit grid placement keeps banner in col-1 (narrow) on desktop.
-            <>
-              <div className="md:col-start-2 md:row-start-1">{productSlider}</div>
-              <div className="h-full md:col-start-1 md:row-start-1">{categoryPanel}</div>
-            </>
-          ) : (
-            <>
-              <div>{productSlider}</div>
-              <div className="h-full">{categoryPanel}</div>
-            </>
-          )}
-        </div>
+    <section className="bg-[#f3f3f3] my-5 lg:my-12">
+      <div
+        className={`mx-auto max-w-[1400px] flex flex-col md:flex-row ${
+          imagePosition === "right" ? "md:flex-row-reverse" : ""
+        }`}
+      >
+        {categoryPanel}
+        {productSlider}
       </div>
     </section>
   );

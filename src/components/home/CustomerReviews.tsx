@@ -1,82 +1,130 @@
 "use client";
 
 import Image from "next/image";
-import { Star } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 import { reviews } from "@/data/reviews";
 
 function StarRating({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5">
+    <div className="flex items-center gap-0.5">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
+        <svg
           key={i}
-          className={`h-3.5 w-3.5 ${
-            i < rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"
-          }`}
-        />
+          viewBox="0 0 20 20"
+          fill={i < rating ? "#f59e0b" : "none"}
+          stroke={i < rating ? "#f59e0b" : "#d1d5db"}
+          strokeWidth="1.5"
+          className="w-3.5 h-3.5"
+        >
+          <path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78z" />
+        </svg>
       ))}
     </div>
   );
 }
 
-export function CustomerReviews() {
+// Quote SVG icon
+function QuoteIcon() {
   return (
-    <section className="bg-[#f8f4f0] py-10">
-      <div className="mx-auto max-w-7xl px-4">
-        <div className="mb-6 text-center">
-          <h2 className="text-base font-bold tracking-widest text-gray-900 uppercase md:text-lg">
+    <svg viewBox="0 0 32 22" fill="#ccc" className="w-8 h-6 opacity-60">
+      <path d="M0 22V13.2C0 9.75 .817 6.933 2.45 4.75 4.083 2.567 6.517 1.017 9.75 0.1L11 3.3C9.167 3.967 7.75 5 6.75 6.4 5.75 7.8 5.267 9.533 5.3 11.6H10V22H0zm18 0V13.2c0-3.45.817-6.267 2.45-8.45 1.633-2.183 4.067-3.733 7.3-4.65L29 3.3c-1.833.667-3.25 1.7-4.25 3.1-1 1.4-1.483 3.133-1.45 5.2H28V22H18z" />
+    </svg>
+  );
+}
+
+export function CustomerReviews() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollBy({
+      left: dir === "left" ? -320 : 320,
+      behavior: "smooth",
+    });
+  };
+
+  return (
+    <section className="bg-[#f5f5f5] py-10">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
+        {/* Heading */}
+        <div className="mb-7 text-center">
+          <h2 className="text-base font-bold text-[#212121] font-bahnschrift">
             Customer Review
           </h2>
-          <div className="mx-auto mt-1.5 h-[2px] w-12 bg-gray-800" />
+          <p className="mt-1 text-xs text-gray-500 font-bahnschrift">
+            What our customer think about us
+          </p>
         </div>
 
-        <Carousel opts={{ align: "start" }} className="px-9">
-          <CarouselContent>
+        {/* Carousel */}
+        <div className="relative">
+          <button
+            aria-label="Scroll left"
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-[40%] z-10 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-50 transition-colors"
+          >
+            <ChevronLeft className="h-4 w-4 text-gray-600" />
+          </button>
+
+          <div
+            ref={scrollRef}
+            className="flex gap-4 overflow-x-auto px-10 pb-2 scroll-smooth"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {reviews.map((review) => (
-              <CarouselItem
+              <div
                 key={review.id}
-                className="basis-full sm:basis-1/2 lg:basis-1/3"
+                className="shrink-0 w-[75vw] sm:w-[45vw] lg:w-[22vw] bg-white rounded-lg border border-gray-100 p-4 flex flex-col gap-3"
               >
-                <div className="flex flex-col gap-3 rounded-xl bg-white p-4 shadow-sm">
-                  <div className="flex items-center gap-3">
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-200">
-                      {review.avatar ? (
-                        <Image
-                          src={review.avatar}
-                          alt={review.customerName}
-                          fill
-                          className="object-cover"
-                          sizes="40px"
-                        />
-                      ) : (
-                        <span className="flex h-full w-full items-center justify-center text-sm font-bold text-gray-500">
-                          {review.customerName[0]}
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-gray-900">{review.customerName}</p>
+                {/* Avatar + name + stars */}
+                <div className="flex items-start gap-3">
+                  <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[30%] bg-gray-200">
+                    {review.avatar ? (
+                      <Image
+                        src={review.avatar}
+                        alt={review.customerName}
+                        fill
+                        className="object-cover"
+                        sizes="56px"
+                      />
+                    ) : (
+                      <span className="flex h-full w-full items-center justify-center text-lg font-bold text-gray-500">
+                        {review.customerName[0]}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-[#212121] font-bahnschrift">
+                        {review.rating} ★
+                      </span>
                       <StarRating rating={review.rating} />
                     </div>
-                    <span className="ml-auto shrink-0 text-[10px] text-gray-400">
-                      {review.date}
-                    </span>
+                    <QuoteIcon />
                   </div>
-                  <p className="text-xs leading-relaxed text-gray-600">{review.text}</p>
                 </div>
-              </CarouselItem>
+
+                <div>
+                  <p className="text-sm font-bold text-[#212121] font-bahnschrift">
+                    {review.customerName}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-relaxed text-gray-500 font-bahnschrift line-clamp-4">
+                    {review.text}
+                  </p>
+                </div>
+              </div>
             ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-0 border-gray-200 bg-white shadow-md hover:bg-gray-50" />
-          <CarouselNext className="right-0 border-gray-200 bg-white shadow-md hover:bg-gray-50" />
-        </Carousel>
+          </div>
+
+          <button
+            aria-label="Scroll right"
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-[40%] z-10 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-md border border-gray-200 hover:bg-gray-50 transition-colors"
+          >
+            <ChevronRight className="h-4 w-4 text-gray-600" />
+          </button>
+        </div>
       </div>
     </section>
   );

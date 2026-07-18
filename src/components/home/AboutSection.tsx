@@ -1,54 +1,42 @@
 import Image from "next/image";
 
-const CDN = "https://cdn.manfarebd.com/glamtouch/media";
-
 export function AboutSection() {
   return (
-    <section className="relative overflow-hidden py-16">
-      {/* Background — use a wide product image */}
-      <div className="absolute inset-0">
+    <section className="relative overflow-hidden">
+      {/* Full-width background image */}
+      <div className="relative w-full aspect-[16/6] min-h-[320px]">
         <Image
-          src={`${CDN}/175412582929266302186_gt_web_banner_2.webp`}
-          alt="Alpha Man collection"
+          src="https://cdn.manfarebd.com/manfarebd/media/177798829275254222196_old_moyae_polo_web_.webp"
+          alt="Manfare lifestyle"
           fill
           className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
 
-      {/* Content card */}
-      <div className="relative mx-auto max-w-2xl px-4">
-        <div className="rounded-2xl bg-white/90 px-8 py-10 text-center shadow-2xl backdrop-blur-sm">
-          {/* Logo text */}
-          <div className="mb-4">
-            <span className="font-serif text-2xl font-bold tracking-[0.25em] text-gray-900 uppercase md:text-3xl">
-              ALPHA MAN
-            </span>
-            <p className="mt-0.5 text-[10px] tracking-[0.35em] text-gray-400 uppercase">
-              Alpha Man
+        {/* Centered glassmorphism card */}
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="max-w-lg w-full rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 px-8 py-8 text-center shadow-2xl">
+            {/* Logo */}
+            <div className="mb-4 flex justify-center">
+              <Image
+                src="https://manfarebd.com/_next/static/media/logo.11838dda.png"
+                alt="Manfare"
+                width={140}
+                height={36}
+                className="object-contain"
+              />
+            </div>
+
+            <p className="text-xs leading-relaxed text-white md:text-sm">
+              Manfare is a lifestyle brand with a touch of enhanced &amp; heritage in
+              our design. We make your personality stand out with our top of the line collection.
             </p>
-          </div>
-
-          <div className="mx-auto mb-4 h-px w-16 bg-gray-300" />
-
-          <p className="text-sm leading-relaxed text-gray-700 md:text-base">
-            Alpha Man is a renowned fashion brand dedicated to providing premium quality
-            clothing and accessories for men. Our collection combines style with confidence,
-            reflecting the strength and sophistication of the modern man.
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-gray-600">
-            We are committed to the{" "}
-            <span className="font-semibold text-gray-800">"Sensation of Glamour"</span> — bringing
-            you designs that are both fashionable and modest, crafted with the finest materials for
-            the modern Muslim woman.
-          </p>
-
-          <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-gray-500">
-            <span>✦ Premium Quality</span>
-            <span>✦ Elegant Designs</span>
-            <span>✦ Affordable Prices</span>
-            <span>✦ Fast Delivery</span>
+            <p className="mt-2.5 text-xs leading-relaxed text-white/90 md:text-sm">
+              Be the attention of every occasion with manfare. Manfare is a lifestyle brand
+              with a touch of enhanced &amp; heritage in our design. We make your personality
+              stand out with our top of the line collection. Be the attention of every
+              occasion with manfare.
+            </p>
           </div>
         </div>
       </div>

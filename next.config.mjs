@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: "cdn.manfarebd.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "manfarebd.com",
+        pathname: "/**",
+      },
     ],
   },
 };

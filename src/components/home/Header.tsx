@@ -1,165 +1,226 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Phone, Heart, ShoppingCart, User, Search } from "lucide-react";
+import { useState } from "react";
+import Image from "next/image";
+import { Search } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
-import { Input } from "@/components/ui/input";
-import { navItems } from "@/data/categories";
+
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Panjabi", href: "/category/panjabi" },
+  { label: "Shirt", href: "/category/shirt" },
+  { label: "Polo Shirt", href: "/category/polo-shirt" },
+  { label: "Pant", href: "/category/bootcut-gurkha-pant" },
+  { label: "Boxer", href: "/category/boxer" },
+  { label: "T-Shirt", href: "/category/drop-shoulder-tshirt" },
+  { label: "Winter", href: "/category/winter" },
+  { label: "Accessories", href: "/category/accessories" },
+  { label: "Shop", href: "/shop" },
+  { label: "Lifestyle", href: "/lifestyle" },
+];
 
 export function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      window.location.href = `/search?text=${encodeURIComponent(searchQuery)}`;
+    }
+  };
+
   return (
-    <header className="sticky top-0 z-40 w-full bg-white shadow-sm">
-      {/* ── Desktop top bar ── */}
-      <div className="mx-auto hidden max-w-7xl items-center gap-6 px-6 py-3 md:flex">
-        {/* Search */}
-        <div className="w-64">
-          <div className="relative">
-            <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <Input className="h-9 pl-9 text-sm" placeholder="Search products..." />
+    <>
+      <header className="sticky top-0 z-50 w-full bg-white shadow-sm font-bahnschrift">
+        {/* ── Desktop header ── */}
+        <div className="hidden lg:block">
+          <div className="mx-auto grid max-w-[1400px] grid-cols-3 px-16 mt-10 mb-8 items-center">
+            {/* Search (Left) */}
+            <div className="justify-self-start relative">
+              <form onSubmit={handleSearch} className="flex items-center border border-gray-100 rounded px-2 bg-white">
+                <input
+                  type="text"
+                  placeholder="Search for products . . ."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="p-2 placeholder:font-montserrat placeholder:text-sm placeholder:text-[#818181] focus:outline-none text-sm w-48 text-gray-700"
+                />
+                <button type="submit" className="focus:outline-none">
+                  <Search className="w-5 h-5 text-[#818181] ms-1 hover:text-black transition-colors" />
+                </button>
+              </form>
+            </div>
+
+            {/* Logo (Center) */}
+            <div className="justify-self-center">
+              <Link href="/">
+                <Image
+                  alt="manfare logo"
+                  src="https://manfarebd.com/_next/static/media/logo.11838dda.png"
+                  width={218}
+                  height={44}
+                  priority
+                  className="object-cover"
+                />
+              </Link>
+            </div>
+
+            {/* Actions (Right) */}
+            <div className="justify-self-end flex items-center gap-5">
+              <a href="tel:+8809606999695" className="hover:opacity-85 transition-opacity">
+                <Image
+                  alt="contact icon"
+                  src="https://manfarebd.com/_next/static/media/contact-us.f7909e90.png"
+                  width={22}
+                  height={22}
+                />
+              </a>
+              <button className="relative hover:opacity-85 transition-opacity">
+                <Image
+                  alt="wish list icon"
+                  src="https://manfarebd.com/_next/static/media/wishlist-icon.8cdfcb3a.png"
+                  width={18}
+                  height={22}
+                />
+                <span className="absolute -top-1 -right-2 flex h-5 w-5 items-center justify-center bg-[#A98153] text-[10px] text-white rounded-full font-bold">
+                  0
+                </span>
+              </button>
+              <Link href="/account" className="hover:opacity-85 transition-opacity">
+                <Image
+                  alt="profile icon"
+                  src="https://manfarebd.com/_next/static/media/profile-icon.616a146c.png"
+                  width={23}
+                  height={22}
+                />
+              </Link>
+            </div>
+          </div>
+
+          {/* Separator gold image */}
+          <div className="container mx-auto px-16 shadow-sm">
+            <Image
+              alt=""
+              src="https://manfarebd.com/_next/static/media/rectangle.a9cd1050.png"
+              width={1537}
+              height={3}
+              className="mx-auto"
+            />
+          </div>
+
+          {/* Navigation bar (Desktop) */}
+          <div className="py-4">
+            <ul className="flex gap-4 min-[1200px]:gap-6 min-[1400px]:gap-9 justify-center uppercase text-sm text-[#212121] tracking-wider min-[1400px]:tracking-widest font-bold">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-[#A98153] transition-colors duration-200"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        {/* Logo */}
-        <div className="flex flex-1 flex-col items-center">
-          <Link href="/" className="flex flex-col items-center">
-            <span className="font-serif text-2xl font-bold tracking-[0.25em] text-gray-900 uppercase">
-              ALPHA MAN
-            </span>
-            <span className="text-[9px] tracking-[0.4em] text-gray-400 uppercase">
-              Alpha Man
-            </span>
-          </Link>
-        </div>
-
-        {/* Action icons */}
-        <div className="flex w-64 items-center justify-end gap-5">
-          <a
-            href="tel:+8809606999695"
-            className="flex flex-col items-center gap-0.5 text-gray-600 hover:text-black"
-          >
-            <Phone className="h-5 w-5" />
-            <span className="text-[10px]">Call Us</span>
-          </a>
-          <Link
-            href="/wishlist"
-            className="flex flex-col items-center gap-0.5 text-gray-600 hover:text-black"
-          >
-            <Heart className="h-5 w-5" />
-            <span className="text-[10px]">Wishlist</span>
-          </Link>
-          <Link
-            href="/cart"
-            className="flex flex-col items-center gap-0.5 text-gray-600 hover:text-black"
-          >
-            <ShoppingCart className="h-5 w-5" />
-            <span className="text-[10px]">Cart</span>
-          </Link>
-          <Link
-            href="/account"
-            className="flex flex-col items-center gap-0.5 text-gray-600 hover:text-black"
-          >
-            <User className="h-5 w-5" />
-            <span className="text-[10px]">Account</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* ── Desktop nav bar ── */}
-      <nav className="hidden border-t border-gray-100 bg-[#1a1a1a] md:block">
-        <div className="mx-auto flex max-w-7xl items-center justify-center gap-8 px-6 py-2.5">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-xs font-medium tracking-wide text-gray-200 uppercase hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-      </nav>
-
-      {/* ── Mobile top bar ── */}
-      <div className="flex items-center justify-between px-4 py-3 md:hidden bg-black border-b border-yellow-500/30">
-        <Sheet>
-          <SheetTrigger asChild>
-            <button aria-label="Open menu" className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-300">
-              <Menu className="h-6 w-6 text-yellow-400" />
-            </button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-80 p-0 shadow-2xl bg-gradient-to-b from-black to-gray-900">
-            <SheetTitle className="sr-only">Navigation menu</SheetTitle>
-            
-            {/* Header section with gold accent */}
-            <div className="bg-gradient-to-b from-black to-gray-900 px-6 py-8 border-b border-yellow-500/30">
-              <span className="font-serif text-xl font-bold tracking-[0.25em] text-yellow-400 uppercase block drop-shadow-lg">
-                ALPHA MAN
-              </span>
-              <div className="h-0.5 w-16 bg-gradient-to-r from-yellow-400 to-transparent mt-3"></div>
-              <p className="text-[10px] tracking-[0.15em] text-yellow-600/70 uppercase mt-3">
-                Premium Collection
-              </p>
-            </div>
-
-            {/* Search section */}
-            <div className="px-6 py-4 border-b border-yellow-500/20">
-              <div className="relative">
-                <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-yellow-500/50" />
-                <Input 
-                  className="h-10 pl-10 text-sm rounded-lg bg-gray-800 border border-yellow-500/30 text-white placeholder:text-gray-500 focus:border-yellow-400 focus:ring-yellow-400/20 transition-all duration-300" 
-                  placeholder="Search products..." 
+        {/* ── Mobile/Tablet header ── */}
+        <div className="flex justify-between items-center shadow-md fixed top-0 left-0 right-0 z-[6999] bg-white w-full lg:hidden h-16 px-4">
+          <Sheet>
+            <SheetTrigger asChild>
+              <div className="cursor-pointer border-r pr-4 h-full flex items-center">
+                <Image
+                  alt="menu icon"
+                  src="https://manfarebd.com/_next/static/media/menu-bar.11f1d03e.png"
+                  width={23}
+                  height={22}
                 />
               </div>
-            </div>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] p-0 bg-white font-bahnschrift">
+              <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+              <div className="py-6 border-b border-gray-100 flex justify-center">
+                <Image
+                  alt="manfare logo"
+                  src="https://manfarebd.com/_next/static/media/logo.11838dda.png"
+                  width={175}
+                  height={35}
+                />
+              </div>
 
-            {/* Navigation items */}
-            <nav className="flex flex-col overflow-y-auto">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="px-6 py-4 text-sm font-semibold text-gray-300 hover:text-yellow-400 border-b border-gray-800/50 hover:bg-gradient-to-r hover:from-yellow-500/10 hover:to-transparent transition-all duration-300 flex items-center justify-between group"
-                >
-                  <span>{item.label}</span>
-                  <span className="text-gray-600 group-hover:text-yellow-400 transition-colors duration-300 group-hover:translate-x-1 transform">
-                    →
-                  </span>
-                </Link>
-              ))}
-            </nav>
+              {/* Navigation links inside drawer */}
+              <nav className="flex flex-col py-4">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className="px-6 py-3.5 text-sm font-semibold text-[#212121] hover:text-[#A98153] border-b border-gray-50 flex items-center justify-between transition-colors"
+                  >
+                    <span>{item.label}</span>
+                    <span className="text-gray-400">→</span>
+                  </Link>
+                ))}
+              </nav>
 
-            {/* Footer section */}
-            <div className="border-t border-yellow-500/20 bg-black/50 px-6 py-5">
-              <div className="flex flex-col gap-4">
+              {/* Call support */}
+              <div className="p-6 bg-gray-50 absolute bottom-0 left-0 right-0 border-t">
                 <a
                   href="tel:+8809606999695"
-                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors duration-300"
+                  className="flex items-center gap-3 text-sm font-bold text-[#A98153]"
                 >
-                  <Phone className="h-5 w-5 text-yellow-500/70 group-hover:text-yellow-400" />
-                  Call Us: +880 9606 999695
+                  <Search className="h-4 w-4 hidden" /> {/* spacer */}
+                  Call Us: +880 9606999695
                 </a>
-                <Link
-                  href="/account"
-                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-yellow-400 transition-colors duration-300"
-                >
-                  <User className="h-5 w-5 text-yellow-500/70" />
-                  My Account
-                </Link>
               </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+            </SheetContent>
+          </Sheet>
 
-        <Link href="/" className="flex flex-col items-center">
-          <span className="font-serif text-lg font-bold tracking-[0.2em] text-yellow-400 uppercase drop-shadow-md">
-            ALPHA MAN
-          </span>
-        </Link>
+          {/* Logo (Center) */}
+          <div className="py-2">
+            <Link href="/">
+              <Image
+                alt="manfare logo"
+                src="https://manfarebd.com/_next/static/media/logo.11838dda.png"
+                width={150}
+                height={30}
+                className="object-contain"
+                style={{ aspectRatio: "5", objectFit: "cover" }}
+              />
+            </Link>
+          </div>
 
-        <Link href="/account" aria-label="Account" className="p-2 hover:bg-gray-800 rounded-lg transition-colors duration-300">
-          <User className="h-6 w-6 text-yellow-400" />
-        </Link>
+          {/* Profile (Right) */}
+          <div className="border-l pl-4 h-full flex items-center">
+            <Link href="/account">
+              <Image
+                alt="contact icon"
+                src="https://manfarebd.com/_next/static/media/profile-icon.616a146c.png"
+                width={23}
+                height={22}
+              />
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* ── Desktop Floating Shopping Cart ── */}
+      <div className="hidden lg:block fixed right-0 top-1/2 -translate-y-1/2 font-bahnschrift cursor-pointer z-40 shadow-xl border border-gray-100 rounded-l overflow-hidden">
+        <div className="bg-[#46351F] flex flex-col items-center justify-center pt-3 pb-2 px-3 text-center">
+          <Image
+            alt="shopping icon"
+            src="https://manfarebd.com/_next/static/media/shopping-icon.ce9b4cf2.png"
+            width={30}
+            height={37}
+            className="w-[20px] h-auto object-contain"
+          />
+          <p className="text-[12px] text-[#F9AF5E] mt-1 font-semibold">0 items</p>
+        </div>
+        <p className="bg-[#A98153] text-white flex justify-center items-center py-1 text-center font-bold text-[12px]">
+          <span className="ps-1">৳ 0</span>
+        </p>
       </div>
-    </header>
+    </>
   );
 }

@@ -14,7 +14,7 @@ interface FilterOptions {
 }
 
 interface CategoryFilterProps {
-  onFilterChange: (filters: FilterOptions) => void;
+  onFilterChange?: (filters: FilterOptions) => void;
   maxPrice?: number;
 }
 
@@ -54,7 +54,7 @@ export function CategoryFilter({ onFilterChange, maxPrice = 5000 }: CategoryFilt
 
     const updatedFilters = { ...filters, priceRange: newRange };
     setFilters(updatedFilters);
-    onFilterChange(updatedFilters);
+    onFilterChange?.(updatedFilters);
   };
 
   const handleMultiSelect = (
@@ -71,7 +71,7 @@ export function CategoryFilter({ onFilterChange, maxPrice = 5000 }: CategoryFilt
     }
 
     setFilters(updated);
-    onFilterChange(updated);
+    onFilterChange?.(updated);
   };
 
   const clearFilters = () => {
@@ -83,7 +83,7 @@ export function CategoryFilter({ onFilterChange, maxPrice = 5000 }: CategoryFilt
       badges: [],
     };
     setFilters(cleared);
-    onFilterChange(cleared);
+    onFilterChange?.(cleared);
   };
 
   const hasActiveFilters =

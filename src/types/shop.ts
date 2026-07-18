@@ -7,6 +7,10 @@ export interface Product {
   image: string;
   badge?: "NEW" | "SALE" | "HOT";
   rating?: number;
+  madeIn?: string;
+  sku?: string;
+  brand?: string;
+  badgeLabel?: string;
   reviewCount?: number;
 }
 

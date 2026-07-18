@@ -61,7 +61,7 @@ export default function HomePage() {
 
         {/* 6. Dual promo banners — Boxer / Designer Edition */}
         <section className="bg-white py-4">
-          <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
+          <div className="container mx-auto">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <PromoBanner
                 image="https://cdn.manfarebd.com/manfarebd/media/md/177799054199940989123_product_caruosel_banner_premium_tshirt.webp"
@@ -100,7 +100,7 @@ export default function HomePage() {
 
         {/* 10. Three-column promo row */}
         <section className="bg-white py-4">
-          <div className="mx-auto max-w-[1400px] px-4 md:px-8 lg:px-16">
+          <div className="container mx-auto">
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[
                 {

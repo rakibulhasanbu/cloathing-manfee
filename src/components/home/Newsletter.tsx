@@ -15,7 +15,7 @@ export function Newsletter() {
 
   return (
     <section className="bg-[#f5f5f5] py-12 px-4">
-      <div className="mx-auto max-w-5xl rounded-[32px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.05)] border border-gray-100 px-6 py-8 md:px-10">
+      <div className="mx-auto max-w-5xl rounded-[20px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.05)] px-6 py-8 md:px-16 md:py-16">
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div className="shrink-0">
             <h2 className="text-base font-bold text-[#212121] font-bahnschrift md:text-xl">

@@ -20,6 +20,7 @@ import {
   designerKarchupi,
 } from "@/data/products";
 import { browseCategories, categoryBanners } from "@/data/categories";
+import { PromoBannerGrid } from "@/components/home/PromoBannerGrid";
 
 const hijarNiqabCat = browseCategories.find((c) => c.slug === "panjabi")!;
 const abayaGownCat = browseCategories.find((c) => c.slug === "polo-shirt")!;
@@ -101,7 +102,7 @@ export default function HomePage() {
         {/* 10. Three-column promo row */}
         <section className="bg-white py-4">
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {/* <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               {[
                 {
                   image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799448192420972676_category_cards_panjabi.webp",
@@ -127,7 +128,29 @@ export default function HomePage() {
                   aspectClass="aspect-[4/3] sm:aspect-[3/4]"
                 />
               ))}
-            </div>
+            </div> */}
+            <PromoBannerGrid
+              banners={{
+                large: {
+                  image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799448192420972676_category_cards_panjabi.webp",
+                  alt: "Panjabi Collection — Manfare",
+                  href: "/category/panjabi",
+                  title: "Designer Eid Collection"
+                },
+                topRight: {
+                  image: "https://cdn.manfarebd.com/manfarebd/media/sm/177799451597618912378_category_cards_knitted_polo.webp",
+                  alt: "Polo Shirt Collection — Manfare",
+                  href: "/category/polo-shirt",
+                  title: "Premium T-Shirt"
+                },
+                bottomRight: {
+                  image: "https://cdn.manfarebd.com/manfarebd/media/sm/176581748811188152344_5_web_card_drop.webp",
+                  alt: "Drop Shoulder T-Shirt — Manfare",
+                  href: "/category/drop-shoulder-tshirt",
+                  title: "Casual T-Shirt Collection"
+                },
+              }}
+            />
           </div>
         </section>
 
